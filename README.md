@@ -308,7 +308,7 @@ By using AI-based image analysis, the system can convert an ordinary civic issue
 
 ## 📦 Repository
 
-**GitHub Repository:** `ADD_GITHUB_REPOSITORY_LINK`
+ **GitHub Repository:** https://github.com/abhishekp1428-wq/CivicEye-AI-HackMatrix2026
 
 ---
 
