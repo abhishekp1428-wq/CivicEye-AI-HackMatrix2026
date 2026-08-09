@@ -297,7 +297,9 @@ CivicEye AI aims to reduce the effort required to understand and report civic in
 By using AI-based image analysis, the system can convert an ordinary civic issue image into structured information that can eventually become part of a complete civic complaint workflow.
 
 ---
+## 📑 Project Presentation
 
+[View CivicEye AI Presentation](https://docs.google.com/presentation/d/1rpHJCm9nagb2rcpnhlkcx9rgyr0C5DmD/edit?usp=drivesdk)
 
 ## 🎥 Demo Video
 
