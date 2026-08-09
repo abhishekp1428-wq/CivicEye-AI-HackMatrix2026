@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Issues — CivicEye AI</title>
+<link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+<link href="[https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500;600&family=Hind:wght@400;500;600&display=swap](https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500;600&family=Hind:wght@400;500;600&display=swap)" rel="stylesheet">
+<link rel="stylesheet" href="../style/dashboard.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="dashboard.html" class="brand-mark" style="text-decoration:none;">
+      <span class="glyph">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01"/></svg>
+      </span>
+      <span>Civic<em>Eye</em> AI</span>
+    </a>
+
+    <ul class="nav">
+      <li><a href="dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Dashboard</a></li>
+      <li><a href="myisuu.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>My Issues</a></li>
+      <li><a href="my-reports.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h8l6 6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M14 3v6h6"/></svg>My Reports</a></li>
+      <li><a href="notifications.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Notifications</a></li>
+      <li><a href="track-status.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Track Status</a></li>
+      <li><a href="profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4.5 5-6 8-6s6.5 1.5 8 6"/></svg>Profile</a></li>
+      <li><a href="settings.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>Settings</a></li>
+    </ul>
+
+    <a href="login.html" class="logout" id="logoutBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+      Logout
+    </a>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <h1>My Issues</h1>
+      <div class="topbar-right">
+        <div class="bell">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </div>
+        <div class="user">
+          <img src="[https://api.dicebear.com/7.x/avataaars/svg?seed=Abhishek](https://api.dicebear.com/7.x/avataaars/svg?seed=Abhishek)" alt="">
+          <div class="who">
+            <div class="name">Abhishek Patel</div>
+            <div class="role">Citizen</div>
+          </div>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="welcome-row">
+        <div class="welcome">
+          <h2>My Issues</h2>
+          <p>Track every issue you have reported, from submission to resolution.</p>
+        </div>
+      </div>
+
+      <!-- SEARCH AND FILTER CONTROLS -->
+      <div class="filter-bar" style="display: flex; gap: 12px; margin-bottom: 20px;">
+        <input type="text" id="searchInput" placeholder="Search title, location, department..." style="flex: 1; padding: 10px 14px; border-radius: 8px; border: 1px solid #d1d5db; font-size: 14px;">
+        
+        <select id="statusFilter" style="padding: 10px 14px; border-radius: 8px; border: 1px solid #d1d5db; font-size: 14px; background: white; cursor: pointer;">
+          <option value="All">All Status</option>
+          <option value="Submitted">Submitted</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Resolved">Resolved</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+      </div>
+
+      <!-- ISSUES TABLE PANEL -->
+      <div class="panel-card" style="padding: 0; overflow-x: auto; background: white; border-radius: 10px; border: 1px solid #e5e7eb;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+          <thead style="background: #f9fafb; border-bottom: 1px solid #e5e7eb; color: #4b5563;">
+            <tr>
+              <th style="padding: 12px 16px;">ID</th>
+              <th style="padding: 12px 16px;">Title</th>
+              <th style="padding: 12px 16px;">Department</th>
+              <th style="padding: 12px 16px;">Location</th>
+              <th style="padding: 12px 16px;">Severity</th>
+              <th style="padding: 12px 16px;">Status</th>
+              <th style="padding: 12px 16px;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="issuesTableBody">
+            <!-- Data will load here dynamically -->
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- TIMELINE MODAL -->
+<div id="timelineModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000;">
+  <div style="background: white; padding: 24px; border-radius: 12px; width: 360px; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.15);">
+    <span id="closeModal" style="position: absolute; right: 16px; top: 14px; cursor: pointer; font-size: 20px; font-weight: bold; color: #6b7280;">&times;</span>
+    <h3 style="margin-top: 0; margin-bottom: 8px; font-size: 18px; color: #111827;">Issue Timeline</h3>
+    <p id="modalIssueTitle" style="color: #2563eb; font-weight: 600; margin-bottom: 20px; font-size: 14px;"></p>
+    
+    <div id="timelineContainer" style="display: flex; flex-direction: column; gap: 12px;">
+      <!-- Steps inserted dynamically -->
+    </div>
+  </div>
+</div>
+
+<script src="../js/myissues.js"></script>
+</body>
+</html>
