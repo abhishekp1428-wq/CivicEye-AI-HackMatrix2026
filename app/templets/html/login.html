@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — CivicEye AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500;600&family=Hind:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style/login.css">
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- LEFT: brand / illustration -->
+  <div class="brand">
+    <p class="status">System Online</p>
+    <h1>Civic<span>Eye</span> AI</h1>
+    <p class="tagline">
+      सिर्फ शिकायत नहीं, समाधान तक ट्रैकिंग
+      <em>Log in to report and track.</em>
+    </p>
+
+    <div class="scene">
+      <div class="footer-tag"><span>Municipal Grid</span><span>Ward 01–24</span></div>
+      <svg viewBox="0 0 460 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="skyFade" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#12294A" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#081527" stop-opacity="1"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="460" height="260" fill="url(#skyFade)"/>
+        <g stroke="#3E5C8A" stroke-width="2" fill="none">
+          <line x1="60" y1="70" x2="60" y2="150"/>
+          <circle cx="60" cy="70" r="2.5" fill="#3E5C8A"/>
+          <path d="M60 70 L40 58 M60 70 L80 60 M60 70 L58 44">
+            <animateTransform attributeName="transform" type="rotate" from="0 60 70" to="360 60 70" dur="7s" repeatCount="indefinite"/>
+          </path>
+        </g>
+        <g stroke="#3E5C8A" stroke-width="2" fill="none">
+          <line x1="390" y1="55" x2="390" y2="150"/>
+          <circle cx="390" cy="55" r="2.5" fill="#3E5C8A"/>
+          <path d="M390 55 L370 43 M390 55 L410 45 M390 55 L388 29">
+            <animateTransform attributeName="transform" type="rotate" from="0 390 55" to="360 390 55" dur="6s" repeatCount="indefinite"/>
+          </path>
+        </g>
+        <g fill="#132A4E">
+          <rect x="90" y="120" width="34" height="140"/>
+          <rect x="130" y="90" width="26" height="170"/>
+          <rect x="162" y="140" width="30" height="120"/>
+          <rect x="198" y="70" width="30" height="190"/>
+          <rect x="234" y="110" width="24" height="150"/>
+          <rect x="264" y="150" width="30" height="110"/>
+          <rect x="300" y="95" width="26" height="165"/>
+          <rect x="332" y="130" width="30" height="130"/>
+        </g>
+        <g fill="#F2A93B" opacity="0.85">
+          <rect x="98" y="135" width="4" height="4"/>
+          <rect x="110" y="150" width="4" height="4"/>
+          <rect x="138" y="105" width="4" height="4"/>
+          <rect x="150" y="130" width="4" height="4"/>
+          <rect x="206" y="90" width="4" height="4"/>
+          <rect x="218" y="115" width="4" height="4"/>
+          <rect x="242" y="128" width="4" height="4"/>
+          <rect x="308" y="112" width="4" height="4"/>
+          <rect x="340" y="148" width="4" height="4"/>
+        </g>
+        <rect x="0" y="258" width="460" height="2" fill="#1B3454"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- RIGHT: form -->
+  <div class="panel">
+    <h2>Welcome back</h2>
+    <p class="sub">Log in to continue tracking civic reports.</p>
+
+    <form id="loginForm">
+      <div class="field">
+        <label for="identifier">Phone or Email</label>
+        <input
+          type="text"
+          id="identifier"
+          name="identifier"
+          placeholder="9876543210 or you@email.com"
+          autocomplete="username"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          required
+        >
+      </div>
+
+      <div class="options">
+        <label class="remember">
+          <input type="checkbox" id="remember">
+          Remember me
+        </label>
+        <a href="#">Forgot Password?</a>
+      </div>
+
+      <p id="errorMsg" class="error"></p>
+
+      <button type="submit">Log In</button>
+    </form>
+
+    <p class="signup">
+      New to CivicEye? <a href="register.html">Create an account</a>
+    </p>
+
+    <p class="footer">Dept-Sync · Municipal · AI Connected</p>
+  </div>
+
+</div>
+
+<script src="../js/login.js"></script>
+</body>
+</html>
