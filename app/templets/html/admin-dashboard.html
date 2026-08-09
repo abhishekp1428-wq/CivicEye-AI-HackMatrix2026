@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | CivicEye AI</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        font-family: 'Hind', sans-serif;
+        background: #0f172a;
+        color: #e2e8f0;
+        margin: 0;
+        padding: 24px;
+    }
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    header h1 { font-size: 20px; margin: 0; }
+    #logoutBtn {
+        background: #dc2626;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 13px;
+    }
+    .filter-bar {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+    .filter-bar input, .filter-bar select {
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid #334155;
+        background: #1e293b;
+        color: #e2e8f0;
+        font-size: 13px;
+    }
+    .filter-bar input { flex: 1; }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #1e293b;
+        border-radius: 10px;
+        overflow: hidden;
+        font-size: 13.5px;
+    }
+    thead { background: #111827; }
+    th, td {
+        padding: 10px 14px;
+        text-align: left;
+        border-bottom: 1px solid #334155;
+    }
+    select.row-select {
+        padding: 5px 8px;
+        border-radius: 6px;
+        border: 1px solid #334155;
+        background: #0f172a;
+        color: #e2e8f0;
+        font-size: 12.5px;
+    }
+    button.action-btn {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        margin-right: 6px;
+    }
+    .save-btn { background: #2563eb; color: white; }
+    .delete-btn { background: #dc2626; color: white; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>CivicEye AI — Admin Dashboard</h1>
+    <div>
+        <span id="adminName" style="margin-right:14px; color:#94a3b8; font-size:13px;"></span>
+        <button id="logoutBtn">Logout</button>
+    </div>
+</header>
+
+<div class="filter-bar">
+    <input type="text" id="searchInput" placeholder="Search by title or location...">
+    <select id="statusFilter">
+        <option value="All">All Status</option>
+        <option value="Pending">Pending</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Resolved">Resolved</option>
+        <option value="Rejected">Rejected</option>
+    </select>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Citizen</th>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Severity</th>
+            <th>Department</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="complaintsTableBody">
+    </tbody>
+</table>
+
+<script src="../js/admin-dashboard.js"></script>
+</body>
+</html>
