@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — CivicEye AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500;600&family=Hind:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style/dashboard.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="dashboard.html" class="brand-mark" style="text-decoration:none;">
+      <span class="glyph">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01"/></svg>
+      </span>
+      <span>Civic<em>Eye</em> AI</span>
+    </a>
+
+    <ul class="nav">
+     
+        <li><a href="dashboard.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Dashboard</a></li>
+        <li>
+    <a href="uploads.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 16V4"/>
+            <path d="M8 8l4-4 4 4"/>
+            <path d="M4 20h16"/>
+        </svg>
+        Upload Complaint
+    </a>
+</li>
+      <li><a href="my-issues.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>My Issues</a></li>
+      <li><a href="my-reports.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h8l6 6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M14 3v6h6"/></svg>My Reports</a></li>
+      <li><a href="notifications.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Notifications</a></li>
+      <li><a href="track-status.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Track Status</a></li>
+      <li><a href="profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4.5 5-6 8-6s6.5 1.5 8 6"/></svg>Profile</a></li>
+      <li><a href="settings.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>Settings</a></li>
+    </ul>
+
+    <a href="login.html" class="logout" id="logoutBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+      Logout
+    </a>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <h1>Dashboard</h1>
+      <div class="topbar-right">
+        <div class="bell">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </div>
+        <div class="user">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Abhishek" alt="">
+          <div class="who">
+            <div class="name" id="userName">Loading...</div>
+            <div class="role">Citizen</div>
+          </div>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="welcome-row">
+        <div class="welcome">
+        <h2 id="welcomeText">Welcome! 👋</h2>
+          <p>आपकी शिकायत, हमारी ज़िम्मेदारी.</p>
+        </div>
+        <div class="date-card">
+          <div class="icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          </div>
+          <div>
+            <div class="date">18 May 2025</div>
+            <div class="day">Sunday</div>
+          </div>
+        </div>
+      </div>
+<a href="uploads.html" class="upload-btn">
+    📷 Report New Complaint
+</a>
+      <div class="stats">
+        <div class="stat-card total">
+          <div class="row">
+            <span class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h8l6 6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M14 3v6h6"/></svg></span>
+            <span class="label">Total Issues</span>
+          </div>
+          <div class="value"></div>
+          <a class="link" href="my-issues.html">View all →</a>
+        </div>
+        <div class="stat-card progress">
+          <div class="row">
+            <span class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 2h14M5 22h14M6 2v6l6 4-6 4v6M18 2v6l-6 4 6 4v6"/></svg></span>
+            <span class="label">In Progress</span>
+          </div>
+          <div class="value"></div>
+          <a class="link" href="track-status.html">View all →</a>
+        </div>
+        <div class="stat-card resolved">
+          <div class="row">
+            <span class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.2 2.2 4.8-4.9"/></svg></span>
+            <span class="label">Resolved</span>
+          </div>
+          <div class="value"></div>
+          <a class="link" href="my-issues.html">View all →</a>
+        </div>
+        <div class="stat-card rejected">
+          <div class="row">
+            <span class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m15 9-6 6M9 9l6 6"/></svg></span>
+            <span class="label">Rejected</span>
+          </div>
+          <div class="value"></div>
+          <a class="link" href="my-issues.html">View all →</a>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel-card">
+          <div class="head">
+            <h3>Issues Overview</h3>
+            <select class="select">
+              <option>This Year</option>
+              <option>Last Year</option>
+            </select>
+          </div>
+          <div class="chart-wrap">
+            <svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.28"/>
+                  <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <g stroke="#EEF1F6" stroke-width="1">
+                <line x1="40" y1="10" x2="40" y2="190"/>
+                <line x1="40" y1="190" x2="540" y2="190"/>
+                <line x1="40" y1="152" x2="540" y2="152"/>
+                <line x1="40" y1="114" x2="540" y2="114"/>
+                <line x1="40" y1="76" x2="540" y2="76"/>
+                <line x1="40" y1="38" x2="540" y2="38"/>
+              </g>
+              <g font-family="IBM Plex Mono, monospace" font-size="10" fill="#94A3B8">
+                <text x="10" y="194">0</text>
+                <text x="4" y="156">10</text>
+                <text x="4" y="118">20</text>
+                <text x="4" y="80">30</text>
+                <text x="4" y="42">40</text>
+                <text x="10" y="14">50</text>
+              </g>
+              <path d="M65 133 L150 95 L235 152 L320 76 L405 45 L490 100"
+                    fill="none" stroke="#3B82F6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M65 133 L150 95 L235 152 L320 76 L405 45 L490 100 L490 190 L65 190 Z"
+                    fill="url(#areaFill)" stroke="none"/>
+              <g fill="#3B82F6">
+                <circle cx="65" cy="133" r="4"/>
+                <circle cx="150" cy="95" r="4"/>
+                <circle cx="235" cy="152" r="4"/>
+                <circle cx="320" cy="76" r="4"/>
+                <circle cx="405" cy="45" r="5" stroke="#fff" stroke-width="2"/>
+                <circle cx="490" cy="100" r="4"/>
+              </g>
+              <g>
+                <rect x="385" y="14" width="40" height="22" rx="6" fill="#3B82F6"/>
+                <text x="405" y="29" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="700" fill="#fff">42</text>
+              </g>
+              <g font-family="Hind, sans-serif" font-size="11.5" fill="#94A3B8">
+                <text x="55" y="208">Jan</text>
+                <text x="138" y="208">Feb</text>
+                <text x="222" y="208">Mar</text>
+                <text x="308" y="208">Apr</text>
+                <text x="396" y="208">May</text>
+                <text x="480" y="208">Jun</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <div class="head">
+            <h3>Recent Issues</h3>
+            <a class="view-all" href="my-issues.html">View All</a>
+          </div>
+
+          <div class="issue-row">
+            <span class="ico" style="background:var(--amber-soft);color:var(--amber);">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            </span>
+            <div class="body">
+              <div class="title">Street Light Not Working</div>
+              <div class="loc">MG Road, Indore</div>
+            </div>
+            <div class="meta">
+              <span class="badge progress">In Progress</span>
+              <span class="date">18 May 2025</span>
+            </div>
+          </div>
+
+          <div class="issue-row">
+            <span class="ico" style="background:var(--ok-soft);color:var(--ok);">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6"/></svg>
+            </span>
+            <div class="body">
+              <div class="title">Garbage overflow on Road</div>
+              <div class="loc">Vijay Nagar, Indore</div>
+            </div>
+            <div class="meta">
+              <span class="badge resolved">Resolved</span>
+              <span class="date">16 May 2025</span>
+            </div>
+          </div>
+
+          <div class="issue-row">
+            <span class="ico" style="background:var(--accent-soft);color:var(--accent);">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.5 7-12A7 7 0 0 0 5 10c0 5.5 7 12 7 12Z"/></svg>
+            </span>
+            <div class="body">
+              <div class="title">Water Leakage</div>
+              <div class="loc">Scheme No. 54, Indore</div>
+            </div>
+            <div class="meta">
+              <span class="badge progress">In Progress</span>
+              <span class="date">14 May 2025</span>
+            </div>
+          </div>
+
+          <div class="issue-row">
+            <span class="ico" style="background:var(--ok-soft);color:var(--ok);">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
+            </span>
+            <div class="body">
+              <div class="title">Pothole on Main Street</div>
+              <div class="loc">Rajwada, Indore</div>
+            </div>
+            <div class="meta">
+              <span class="badge resolved">Resolved</span>
+              <span class="date">10 May 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/dashboard.js"></script>
+</body>
+</html>
