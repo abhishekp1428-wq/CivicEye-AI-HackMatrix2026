@@ -298,11 +298,10 @@ By using AI-based image analysis, the system can convert an ordinary civic issue
 
 ---
 
-## 🎥 Live Demonstration
 
-**Live Demo:** https://drive.google.com/file/d/1Xz5cOKqjVP7pNjZcTtCT1ll3sv9AxXbx/view?usp=drivesdk
+## 🎥 Demo Video
 
-**Demo Video:** https://drive.google.com/file/d/1Xz5cOKqjVP7pNjZcTtCT1ll3sv9AxXbx/view?usp=drivesdk
+[Watch CivicEye AI Demo](https://drive.google.com/file/d/1Xz5cOKqjVP7pNjZcTtCT1ll3sv9AxXbx/view?usp=drivesdk)
 
 ---
 
