@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Complaint | CivicEye AI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=IBM+Plex+Mono:wght@500&family=Hind:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../style/uploads.css">
+</head>
+
+<body>
+
+    <!-- =========================
+            HEADER
+    ========================== -->
+
+    <header class="topbar">
+
+        <a href="dashboard.html" class="back-btn">
+            ← Dashboard
+        </a>
+
+        <span class="logo">
+            CivicEye <em>AI</em>
+        </span>
+
+    </header>
+
+
+    <!-- =========================
+            MAIN
+    ========================== -->
+
+    <main class="container">
+
+        <form id="complaintForm">
+
+            <!-- Complaint Title -->
+
+            <div class="field">
+
+                <label for="title">
+                    Complaint Title
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    placeholder="Enter Complaint Title"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Location -->
+
+            <div class="field">
+
+                <label for="location">
+                    Location
+                </label>
+
+                <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    placeholder="Enter Complaint Location"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Upload Image -->
+
+            <div id="captureBox" class="capture-box">
+
+                <img
+                    id="preview"
+                    alt="Preview"
+                    style="display:none;"
+                >
+
+                <div id="placeholder">
+
+                    <h3>📷 Upload Image</h3>
+
+                    <p>
+                        Click here to upload or capture an image.
+                    </p>
+
+                    <small>
+                        JPG / PNG • Max 10MB
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <input
+                type="file"
+                id="fileInput"
+                accept="image/*"
+                capture="environment"
+                hidden
+            >
+
+
+            <!-- Buttons -->
+
+            <div class="buttons">
+
+                <button
+                    type="button"
+                    id="retakeBtn"
+                    style="display:none;"
+                >
+                    Retake
+                </button>
+
+                <button
+                    type="button"
+                    id="analyzeBtn"
+                    style="display:none;"
+                >
+                    Analyze with AI
+                </button>
+
+            </div>
+
+
+            <!-- AI Analysis -->
+
+            <div
+                id="analysisPanel"
+                class="analysis"
+                style="display:none;"
+            >
+
+                <h2>
+                    AI Analysis
+                </h2>
+
+                <div class="result-item">
+
+                    <strong>Issue :</strong>
+
+                    <span id="resType"></span>
+
+                </div>
+
+                <div class="result-item">
+
+                    <strong>Severity :</strong>
+
+                    <span id="resSeverity"></span>
+
+                </div>
+
+                <div class="result-item">
+
+                    <strong>Department :</strong>
+
+                    <span id="resDept"></span>
+
+                </div>
+
+                <div class="result-item">
+
+                    <strong>Description :</strong>
+
+                    <span id="resDescription"></span>
+
+                </div>
+
+                <div class="result-item">
+
+                    <strong>Priority :</strong>
+
+                    <span id="resPriority"></span>
+
+                </div>
+
+                <div class="result-item">
+
+                    <strong>Location :</strong>
+
+                    <span id="resLocation"></span>
+
+                </div>
+
+
+                <!-- Note -->
+
+                <div class="field">
+
+                    <label for="note">
+
+                        Additional Note
+
+                    </label>
+
+                    <textarea
+                        id="note"
+                        rows="5"
+                        placeholder="Write additional information (Optional)"
+                    ></textarea>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="submitBtn"
+                    class="submit-btn"
+                >
+                    Submit Complaint
+                </button>
+
+            </div>
+
+        </form>
+
+    </main>
+
+
+    <!-- Toast -->
+
+    <div
+        id="toast"
+        class="toast"
+        style="display:none;"
+    >
+
+        Complaint Submitted Successfully ✅
+
+    </div>
+
+
+    <script src="../js/uploads.js"></script>
+
+</body>
+</html>
