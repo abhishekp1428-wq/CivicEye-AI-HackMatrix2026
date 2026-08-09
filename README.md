@@ -300,9 +300,9 @@ By using AI-based image analysis, the system can convert an ordinary civic issue
 
 ## 🎥 Live Demonstration
 
-**Live Demo:** `ADD_LIVE_DEMO_LINK`
+**Live Demo:** https://drive.google.com/file/d/1Xz5cOKqjVP7pNjZcTtCT1ll3sv9AxXbx/view?usp=drivesdk
 
-**Demo Video:** `ADD_DEMO_VIDEO_LINK`
+**Demo Video:** https://drive.google.com/file/d/1Xz5cOKqjVP7pNjZcTtCT1ll3sv9AxXbx/view?usp=drivesdk
 
 ---
 
