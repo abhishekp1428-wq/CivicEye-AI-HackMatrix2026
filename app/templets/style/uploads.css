@@ -1,0 +1,1282 @@
+/*==================================================
+        CIVICEYE AI UPLOADS CSS
+        PART 1 / 4
+        Global • Header • Upload Area
+==================================================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+
+:root{
+
+    --bg:#07111f;
+    --bg2:#0f1c31;
+
+    --card:rgba(255,255,255,.06);
+
+    --white:#ffffff;
+    --text:#dbe8ff;
+    --muted:#91a5c8;
+
+    --border:rgba(255,255,255,.08);
+
+    --blue:#3b82f6;
+    --blue2:#60a5fa;
+
+    --green:#22c55e;
+    --radius:24px;
+
+    --transition:.35s ease;
+
+}
+
+
+/*=========================
+RESET
+=========================*/
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+
+body{
+
+    min-height:100vh;
+
+    font-family:"Inter",sans-serif;
+
+    color:white;
+
+    background:
+
+    radial-gradient(circle at top right,#153b70 0%,transparent 35%),
+    radial-gradient(circle at bottom left,#17435d 0%,transparent 30%),
+    linear-gradient(135deg,var(--bg),var(--bg2));
+
+    overflow-x:hidden;
+
+}
+
+
+/*=========================
+TOP BAR
+=========================*/
+
+.topbar{
+
+    height:78px;
+
+    width:100%;
+
+    padding:0 70px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    backdrop-filter:blur(18px);
+
+    background:rgba(7,17,31,.75);
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+
+/*=========================
+BACK BUTTON
+=========================*/
+
+.back-btn{
+
+    text-decoration:none;
+
+    color:#cbdaf5;
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.06);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.35s;
+
+}
+
+
+.back-btn:hover{
+
+    color:white;
+
+    background:rgba(255,255,255,.12);
+
+    transform:translateX(-4px);
+
+}
+
+
+/*=========================
+LOGO
+=========================*/
+
+.logo{
+
+    font-size:1.6rem;
+
+    font-weight:800;
+
+    letter-spacing:.5px;
+
+}
+
+
+.logo em{
+
+    font-style:normal;
+
+    color:#60a5fa;
+
+}
+
+
+/*=========================
+MAIN CONTAINER
+=========================*/
+
+.container{
+
+    width:min(900px,92%);
+
+    margin:auto;
+
+    padding:60px 0 100px;
+
+    animation:fadeUp .8s ease;
+
+}
+
+
+/*=========================
+HEADING
+=========================*/
+
+.container h1{
+
+    text-align:center;
+
+    font-size:3rem;
+
+    font-weight:800;
+
+    margin-bottom:15px;
+
+    letter-spacing:-1px;
+
+}
+
+
+.subtitle{
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:1.05rem;
+
+    margin-bottom:45px;
+
+}
+
+
+/*=========================
+UPLOAD BOX
+=========================*/
+
+.capture-box{
+
+    width:100%;
+
+    min-height:360px;
+
+    border-radius:28px;
+
+    border:2px dashed rgba(255,255,255,.15);
+
+    background:rgba(255,255,255,.05);
+
+    backdrop-filter:blur(15px);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+    transition:.35s ease;
+
+}
+
+
+.capture-box:hover{
+
+    border-color:#60a5fa;
+
+    background:rgba(255,255,255,.08);
+
+    transform:translateY(-5px);
+
+}
+
+
+/*=========================
+PLACEHOLDER
+=========================*/
+
+#placeholder{
+
+    text-align:center;
+
+}
+
+
+#placeholder h3{
+
+    font-size:1.5rem;
+
+    margin-bottom:12px;
+
+}
+
+
+#placeholder p{
+
+    color:#b3c5e5;
+
+    margin-bottom:10px;
+
+}
+
+
+#placeholder small{
+
+    color:#7f94b8;
+
+}
+
+
+/*=========================
+IMAGE PREVIEW
+=========================*/
+
+#preview{
+
+    width:100%;
+
+    height:100%;
+
+    max-height:500px;
+
+    object-fit:cover;
+
+}
+
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+/*==================================================
+        CIVICEYE AI UPLOADS CSS
+        PART 2 / 4
+        Buttons • Preview Actions • AI Panel
+==================================================*/
+
+
+/*=========================
+BUTTON AREA
+=========================*/
+
+.buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-top:30px;
+
+    flex-wrap:wrap;
+
+}
+
+
+/*=========================
+COMMON BUTTON
+=========================*/
+
+.buttons button,
+#submitBtn{
+
+    border:none;
+
+    outline:none;
+
+    cursor:pointer;
+
+    padding:15px 32px;
+
+    border-radius:999px;
+
+    color:white;
+
+    font-size:.95rem;
+
+    font-weight:700;
+
+    letter-spacing:.3px;
+
+    transition:.35s ease;
+
+}
+
+
+/*=========================
+RETAKE BUTTON
+=========================*/
+
+#retakeBtn{
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    color:#dbe8ff;
+
+}
+
+
+#retakeBtn:hover{
+
+    background:rgba(255,255,255,.15);
+
+    transform:translateY(-3px);
+
+}
+
+
+/*=========================
+AI ANALYZE BUTTON
+=========================*/
+
+#analyzeBtn{
+
+    background:
+
+    linear-gradient(135deg,#2563eb,#60a5fa);
+
+    box-shadow:
+
+    0 15px 35px rgba(37,99,235,.35);
+
+}
+
+
+#analyzeBtn:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+
+    0 25px 55px rgba(37,99,235,.45);
+
+}
+
+
+/*=========================
+DISABLED
+=========================*/
+
+button:disabled{
+
+    opacity:.65;
+
+    cursor:not-allowed;
+
+    transform:none!important;
+
+}
+
+
+/*=========================
+ANALYSIS PANEL
+=========================*/
+
+.analysis{
+
+    margin-top:45px;
+
+    padding:35px;
+
+    border-radius:28px;
+
+    background:rgba(255,255,255,.06);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+
+    0 25px 55px rgba(0,0,0,.35);
+
+    animation:fadeUp .6s ease;
+
+}
+
+
+/*=========================
+ANALYSIS TITLE
+=========================*/
+
+.analysis h2{
+
+    font-size:1.8rem;
+
+    margin-bottom:25px;
+
+    font-weight:800;
+
+}
+
+
+/*=========================
+RESULT TEXT
+=========================*/
+
+.analysis p{
+
+    color:#cbdaf5;
+
+    margin-bottom:14px;
+
+    font-size:1rem;
+
+}
+
+
+.analysis strong{
+
+    color:white;
+
+}
+
+
+.analysis span{
+
+    color:#60a5fa;
+
+    font-weight:700;
+
+}
+
+
+/*=========================
+LOCATION
+=========================*/
+
+#resLocation{
+
+    margin-top:10px;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    background:rgba(59,130,246,.10);
+
+    color:#93c5fd;
+
+}
+
+
+/*=========================
+ANIMATION
+=========================*/
+
+@keyframes slideIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+.analysis{
+
+    animation:slideIn .5s ease;
+
+}
+/*==================================================
+        CIVICEYE AI UPLOADS CSS
+        PART 3 / 4
+        Textarea • Submit • Toast • Effects
+==================================================*/
+
+
+/*=========================
+NOTE LABEL
+=========================*/
+
+.analysis label{
+
+    display:block;
+
+    margin-top:28px;
+
+    margin-bottom:10px;
+
+    color:#dbe8ff;
+
+    font-size:.95rem;
+
+    font-weight:700;
+
+}
+
+
+/*=========================
+TEXTAREA
+=========================*/
+
+textarea{
+
+    width:100%;
+
+    resize:none;
+
+    min-height:120px;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    background:rgba(255,255,255,.05);
+
+    color:white;
+
+    font-size:1rem;
+
+    font-family:inherit;
+
+    transition:.35s ease;
+
+}
+
+
+textarea::placeholder{
+
+    color:#8498bb;
+
+}
+
+
+textarea:focus{
+
+    outline:none;
+
+    border-color:#60a5fa;
+
+    background:rgba(255,255,255,.08);
+
+    box-shadow:
+
+    0 0 0 4px rgba(96,165,250,.15);
+
+}
+
+
+/*=========================
+SUBMIT BUTTON
+=========================*/
+
+#submitBtn{
+
+    width:100%;
+
+    margin-top:28px;
+
+    background:
+
+    linear-gradient(135deg,#16a34a,#22c55e);
+
+    box-shadow:
+
+    0 18px 40px rgba(34,197,94,.30);
+
+}
+
+
+#submitBtn:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+
+    0 30px 60px rgba(34,197,94,.45);
+
+}
+
+
+/*=========================
+BUTTON LOADING EFFECT
+=========================*/
+
+#submitBtn:disabled{
+
+    background:#166534;
+
+}
+
+
+/*=========================
+TOAST MESSAGE
+=========================*/
+
+#toast{
+
+    position:fixed;
+
+    right:35px;
+
+    bottom:35px;
+
+    padding:18px 28px;
+
+    border-radius:18px;
+
+    background:
+
+    rgba(34,197,94,.15);
+
+    border:1px solid rgba(34,197,94,.35);
+
+    backdrop-filter:blur(15px);
+
+    color:#86efac;
+
+    font-weight:700;
+
+    font-size:.95rem;
+
+    box-shadow:
+
+    0 20px 45px rgba(0,0,0,.35);
+
+    animation:toastShow .5s ease;
+
+    z-index:999;
+
+}
+
+
+/*=========================
+TOAST ANIMATION
+=========================*/
+
+@keyframes toastShow{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/*=========================
+CARD HOVER GLOW
+=========================*/
+
+.analysis:hover{
+
+    border-color:rgba(96,165,250,.25);
+
+}
+
+
+/*=========================
+SMOOTH ELEMENT APPEAR
+=========================*/
+
+.capture-box,
+.buttons,
+.analysis{
+
+    animation:fadeUp .7s ease;
+
+}
+/*==================================================
+        CIVICEYE AI UPLOADS CSS
+        PART 4 / 4
+        Responsive • Final Polish
+==================================================*/
+
+
+/*=========================
+FOCUS STATES
+=========================*/
+
+button:focus,
+textarea:focus,
+a:focus{
+
+    outline:2px solid #60a5fa;
+
+    outline-offset:4px;
+
+}
+
+
+/*=========================
+TABLET RESPONSIVE
+=========================*/
+
+@media(max-width:992px){
+
+
+    .topbar{
+
+        padding:0 35px;
+
+    }
+
+
+    .container{
+
+        width:94%;
+
+    }
+
+
+    .container h1{
+
+        font-size:2.5rem;
+
+    }
+
+
+    .capture-box{
+
+        min-height:320px;
+
+    }
+
+
+}
+
+
+/*=========================
+MOBILE RESPONSIVE
+=========================*/
+
+@media(max-width:768px){
+
+
+    .topbar{
+
+        height:70px;
+
+        padding:0 18px;
+
+    }
+
+
+    .logo{
+
+        font-size:1.3rem;
+
+    }
+
+
+    .back-btn{
+
+        font-size:.8rem;
+
+        padding:9px 14px;
+
+    }
+
+
+    .container{
+
+        padding:35px 0 80px;
+
+    }
+
+
+    .container h1{
+
+        font-size:2rem;
+
+    }
+
+
+    .subtitle{
+
+        font-size:.9rem;
+
+        margin-bottom:30px;
+
+    }
+
+
+    .capture-box{
+
+        min-height:260px;
+
+        border-radius:22px;
+
+    }
+
+
+    #placeholder h3{
+
+        font-size:1.2rem;
+
+    }
+
+
+    .buttons{
+
+        flex-direction:column;
+
+        width:100%;
+
+    }
+
+
+    .buttons button{
+
+        width:100%;
+
+    }
+
+
+    .analysis{
+
+        padding:25px 20px;
+
+        border-radius:22px;
+
+    }
+
+
+    .analysis h2{
+
+        font-size:1.5rem;
+
+    }
+
+
+    #toast{
+
+        left:15px;
+
+        right:15px;
+
+        bottom:20px;
+
+        text-align:center;
+
+        font-size:.85rem;
+
+    }
+
+
+}
+
+
+/*=========================
+SMALL MOBILE
+=========================*/
+
+@media(max-width:420px){
+
+
+    .container h1{
+
+        font-size:1.7rem;
+
+    }
+
+
+    .subtitle{
+
+        line-height:1.6;
+
+    }
+
+
+    .capture-box{
+
+        min-height:220px;
+
+    }
+
+
+    textarea{
+
+        min-height:100px;
+
+    }
+
+
+    #submitBtn{
+
+        padding:14px;
+
+        font-size:.9rem;
+
+    }
+
+
+}
+
+
+/*=========================
+LARGE DESKTOP
+=========================*/
+
+@media(min-width:1400px){
+
+
+    .container{
+
+        max-width:1000px;
+
+    }
+
+
+    .capture-box{
+
+        min-height:420px;
+
+    }
+
+
+}
+
+
+/*=========================
+BACKGROUND LIGHT EFFECT
+=========================*/
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    width:350px;
+
+    height:350px;
+
+    top:-120px;
+
+    right:-100px;
+
+    background:rgba(59,130,246,.12);
+
+    filter:blur(80px);
+
+    border-radius:50%;
+
+    z-index:-1;
+
+}
+
+
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    width:320px;
+
+    height:320px;
+
+    bottom:-130px;
+
+    left:-100px;
+
+    background:rgba(34,197,94,.08);
+
+    filter:blur(80px);
+
+    border-radius:50%;
+
+    z-index:-1;
+
+}
+/*=========================================
+        FORM FIELDS
+=========================================*/
+
+.field{
+    display:flex;
+    flex-direction:column;
+    margin:20px 0;
+}
+
+.field label{
+
+    font-size:15px;
+    font-weight:600;
+    color:#23395B;
+    margin-bottom:8px;
+
+}
+
+.field input{
+
+    width:100%;
+    padding:14px 16px;
+
+    border:1px solid #D9E2EC;
+    border-radius:12px;
+
+    background:#FFFFFF;
+
+    font-size:15px;
+
+    transition:.3s;
+
+    outline:none;
+
+}
+
+.field input:focus{
+
+    border-color:#2563EB;
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+
+}
+
+
+/*=========================================
+        TEXTAREA
+=========================================*/
+
+textarea{
+
+    width:100%;
+
+    margin-top:12px;
+
+    padding:14px;
+
+    border:1px solid #D9E2EC;
+
+    border-radius:12px;
+
+    resize:vertical;
+
+    min-height:120px;
+
+    font-size:15px;
+
+    outline:none;
+
+    transition:.3s;
+
+    font-family:'Hind',sans-serif;
+
+}
+
+textarea:focus{
+
+    border-color:#2563EB;
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+
+}
+
+
+/*=========================================
+        ANALYSIS PANEL
+=========================================*/
+
+.analysis{
+
+    margin-top:30px;
+
+    background:#FFFFFF;
+
+    border-radius:18px;
+
+    padding:24px;
+
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
+
+}
+
+.analysis h2{
+
+    margin-bottom:20px;
+
+    color:#1E3A8A;
+
+}
+
+.analysis p{
+
+    margin:10px 0;
+
+    font-size:15px;
+
+}
+
+.analysis span{
+
+    color:#2563EB;
+
+    font-weight:600;
+
+}
+
+
+/*=========================================
+        BUTTONS
+=========================================*/
+
+#submitBtn{
+
+    width:100%;
+
+    margin-top:20px;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#2563EB;
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+#submitBtn:hover{
+
+    background:#1D4ED8;
+
+    transform:translateY(-2px);
+
+}
+
+
+/*=========================================
+        TOAST
+=========================================*/
+
+#toast{
+
+    position:fixed;
+
+    right:25px;
+
+    bottom:25px;
+
+    background:#16A34A;
+
+    color:#fff;
+
+    padding:16px 22px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.18);
+
+    z-index:999;
+
+}
+
+
+/*=========================
+END
+CIVICEYE AI UPLOADS
+=========================*/

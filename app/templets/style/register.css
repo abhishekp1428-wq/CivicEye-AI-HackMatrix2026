@@ -1,0 +1,1046 @@
+/*==================================================
+        CIVICEYE AI REGISTER CSS
+        PART 1 / 4
+        Global • Background • Layout • Card
+==================================================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+
+:root{
+
+    --bg:#07111f;
+    --bg2:#0f1c31;
+
+    --card:rgba(255,255,255,.06);
+
+    --white:#ffffff;
+    --text:#dbe8ff;
+    --muted:#91a5c8;
+
+    --border:rgba(255,255,255,.08);
+
+    --blue:#3b82f6;
+    --blue2:#60a5fa;
+
+    --green:#22c55e;
+    --red:#ef4444;
+
+    --radius:24px;
+
+    --transition:.35s ease;
+
+}
+
+
+/*=========================
+RESET
+=========================*/
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-family:"Inter",sans-serif;
+
+    color:white;
+
+    overflow-x:hidden;
+
+
+    background:
+
+    radial-gradient(circle at top right,#153868 0%,transparent 35%),
+
+    radial-gradient(circle at bottom left,#16415f 0%,transparent 30%),
+
+    linear-gradient(135deg,var(--bg),var(--bg2));
+
+}
+
+
+/*=========================
+SCROLLBAR
+=========================*/
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+
+::-webkit-scrollbar-thumb{
+
+    background:#28496d;
+
+    border-radius:30px;
+
+}
+
+
+::-webkit-scrollbar-track{
+
+    background:#07111f;
+
+}
+
+
+/*=========================
+MAIN CONTAINER
+=========================*/
+
+.register-container{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px 20px;
+
+}
+
+
+/*=========================
+REGISTER CARD
+=========================*/
+
+.register-card{
+
+    width:100%;
+
+    max-width:500px;
+
+
+    padding:45px;
+
+
+    background:var(--card);
+
+    backdrop-filter:blur(18px);
+
+
+    border:1px solid var(--border);
+
+    border-radius:28px;
+
+
+    box-shadow:
+
+    0 25px 60px rgba(0,0,0,.45);
+
+
+    animation:fadeUp .8s ease;
+
+}
+
+
+/*=========================
+STATUS BADGE
+=========================*/
+
+.status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+
+    padding:8px 18px;
+
+    border-radius:999px;
+
+
+    background:rgba(59,130,246,.15);
+
+    color:#93c5fd;
+
+
+    font-size:.82rem;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+
+    margin-bottom:22px;
+
+}
+
+
+.status::before{
+
+    content:"";
+
+    width:10px;
+
+    height:10px;
+
+
+    border-radius:50%;
+
+
+    background:#3b82f6;
+
+
+    animation:pulse 1.4s infinite;
+
+}
+
+
+/*=========================
+TITLE
+=========================*/
+
+.register-card h1{
+
+    font-size:2.6rem;
+
+    font-weight:800;
+
+    letter-spacing:-1px;
+
+    margin-bottom:12px;
+
+}
+
+
+.subtitle{
+
+    color:var(--muted);
+
+    font-size:1rem;
+
+    line-height:1.7;
+
+    margin-bottom:30px;
+
+}
+
+
+/*=========================
+ANIMATIONS
+=========================*/
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(.9);
+
+        opacity:.7;
+
+    }
+
+
+    50%{
+
+        transform:scale(1.5);
+
+        opacity:1;
+
+    }
+
+
+    100%{
+
+        transform:scale(.9);
+
+        opacity:.7;
+
+    }
+
+}
+/*==================================================
+        CIVICEYE AI REGISTER CSS
+        PART 2 / 4
+        Form • Inputs • Terms
+==================================================*/
+
+
+/*=========================
+FORM
+=========================*/
+
+form{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+/*=========================
+LABEL
+=========================*/
+
+form > label{
+
+    margin-top:16px;
+
+    margin-bottom:9px;
+
+    color:#dbe8ff;
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+}
+
+
+/*=========================
+INPUT FIELDS
+=========================*/
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="password"]{
+
+    width:100%;
+
+    height:55px;
+
+    padding:0 18px;
+
+
+    border-radius:16px;
+
+
+    border:1px solid rgba(255,255,255,.08);
+
+
+    background:rgba(255,255,255,.05);
+
+
+    color:white;
+
+
+    font-size:15px;
+
+
+    transition:.35s ease;
+
+}
+
+
+/* Placeholder */
+
+input::placeholder{
+
+    color:#8498bb;
+
+}
+
+
+/* Focus */
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus{
+
+    outline:none;
+
+
+    border-color:#60a5fa;
+
+
+    background:rgba(255,255,255,.08);
+
+
+    box-shadow:
+
+    0 0 0 4px rgba(96,165,250,.15);
+
+}
+
+
+
+/*=========================
+TERMS CHECKBOX
+=========================*/
+
+.terms{
+
+    display:flex;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:8px;
+
+
+    margin-top:22px;
+
+
+    color:#b9cbe8;
+
+
+    font-size:.9rem;
+
+
+    line-height:1.6;
+
+    cursor:pointer;
+
+}
+
+
+/* Checkbox */
+
+.terms input{
+
+    width:18px;
+
+    height:18px;
+
+
+    cursor:pointer;
+
+
+    accent-color:#3b82f6;
+
+}
+
+
+/* Terms Links */
+
+.terms a{
+
+    color:#60a5fa;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+.terms a:hover{
+
+    color:#93c5fd;
+
+    text-decoration:underline;
+
+}
+
+
+/*=========================
+ERROR MESSAGE
+=========================*/
+
+.error{
+
+    min-height:22px;
+
+
+    margin-top:20px;
+
+
+    color:#ef4444;
+
+
+    font-size:.9rem;
+
+
+    font-weight:500;
+
+}
+/*==================================================
+        CIVICEYE AI REGISTER CSS
+        PART 3 / 4
+        Button • Login Link • Effects
+==================================================*/
+
+
+/*=========================
+CREATE ACCOUNT BUTTON
+=========================*/
+
+button[type="submit"]{
+
+    width:100%;
+
+
+    height:58px;
+
+
+    margin-top:28px;
+
+
+    border:none;
+
+
+    border-radius:16px;
+
+
+    cursor:pointer;
+
+
+    color:white;
+
+
+    font-size:1rem;
+
+
+    font-weight:700;
+
+
+    letter-spacing:.4px;
+
+
+
+    background:
+
+    linear-gradient(135deg,#2563eb,#60a5fa);
+
+
+
+    box-shadow:
+
+    0 15px 35px rgba(37,99,235,.35);
+
+
+
+    transition:.35s ease;
+
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+
+/* Button Hover */
+
+button[type="submit"]:hover{
+
+    transform:translateY(-5px);
+
+
+    box-shadow:
+
+    0 28px 55px rgba(37,99,235,.45);
+
+}
+
+
+
+/* Button Click */
+
+button[type="submit"]:active{
+
+    transform:translateY(0);
+
+}
+
+
+
+/* Disabled */
+
+button[type="submit"]:disabled{
+
+    opacity:.7;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+}
+
+
+
+/*=========================
+BUTTON SHINE
+=========================*/
+
+button[type="submit"]::before{
+
+    content:"";
+
+
+    position:absolute;
+
+
+    top:0;
+
+
+    left:-100%;
+
+
+    width:60%;
+
+
+    height:100%;
+
+
+
+    background:
+
+    linear-gradient(
+
+        120deg,
+
+        transparent,
+
+        rgba(255,255,255,.35),
+
+        transparent
+
+    );
+
+
+    transition:.6s;
+
+}
+
+
+button[type="submit"]:hover::before{
+
+    left:120%;
+
+}
+
+
+
+/*=========================
+LOGIN LINK
+=========================*/
+
+.login-link{
+
+    margin-top:30px;
+
+
+    text-align:center;
+
+
+    color:#9eb2d1;
+
+
+    font-size:.95rem;
+
+}
+
+
+
+.login-link a{
+
+    color:#60a5fa;
+
+
+    text-decoration:none;
+
+
+    font-weight:700;
+
+
+    margin-left:5px;
+
+
+    transition:.3s;
+
+}
+
+
+
+.login-link a:hover{
+
+    color:#93c5fd;
+
+
+    text-decoration:underline;
+
+}
+
+
+
+/*=========================
+INPUT ANIMATION
+=========================*/
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="password"]{
+
+    animation:inputShow .5s ease;
+
+}
+
+
+
+@keyframes inputShow{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(10px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+/*=========================
+CARD HOVER
+=========================*/
+
+.register-card:hover{
+
+    border-color:rgba(96,165,250,.18);
+
+}
+/*==================================================
+        CIVICEYE AI REGISTER CSS
+        PART 4 / 4
+        Responsive • Final Polish
+==================================================*/
+
+
+/*=========================
+FOCUS ACCESSIBILITY
+=========================*/
+
+button:focus,
+input:focus,
+a:focus{
+
+    outline:2px solid #60a5fa;
+
+    outline-offset:3px;
+
+}
+
+
+/*=========================
+TABLET RESPONSIVE
+=========================*/
+
+@media(max-width:900px){
+
+    .register-card{
+
+        max-width:460px;
+
+        padding:38px;
+
+    }
+
+
+    .register-card h1{
+
+        font-size:2.3rem;
+
+    }
+
+}
+
+
+
+/*=========================
+MOBILE RESPONSIVE
+=========================*/
+
+@media(max-width:600px){
+
+
+    body{
+
+        align-items:flex-start;
+
+    }
+
+
+    .register-container{
+
+        padding:25px 15px;
+
+    }
+
+
+    .register-card{
+
+        padding:28px 22px;
+
+        border-radius:22px;
+
+    }
+
+
+    .status{
+
+        font-size:.75rem;
+
+        padding:7px 14px;
+
+    }
+
+
+    .register-card h1{
+
+        font-size:2rem;
+
+    }
+
+
+    .subtitle{
+
+        font-size:.9rem;
+
+        margin-bottom:25px;
+
+    }
+
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="password"]{
+
+        height:52px;
+
+        border-radius:14px;
+
+    }
+
+
+    .terms{
+
+        font-size:.82rem;
+
+        align-items:flex-start;
+
+    }
+
+
+    button[type="submit"]{
+
+        height:54px;
+
+    }
+
+
+    .login-link{
+
+        font-size:.85rem;
+
+    }
+
+}
+
+
+
+/*=========================
+SMALL MOBILE
+=========================*/
+
+@media(max-width:380px){
+
+
+    .register-card{
+
+        padding:24px 18px;
+
+    }
+
+
+    .register-card h1{
+
+        font-size:1.7rem;
+
+    }
+
+
+    .subtitle{
+
+        font-size:.84rem;
+
+    }
+
+
+    .terms{
+
+        line-height:1.5;
+
+    }
+
+}
+
+
+
+/*=========================
+LARGE DESKTOP
+=========================*/
+
+@media(min-width:1400px){
+
+
+    .register-card{
+
+        max-width:540px;
+
+        padding:55px;
+
+    }
+
+
+}
+
+
+
+/*=========================
+BACKGROUND GLOW
+=========================*/
+
+body::before{
+
+    content:"";
+
+
+    position:fixed;
+
+
+    width:350px;
+
+
+    height:350px;
+
+
+    top:-120px;
+
+
+    right:-100px;
+
+
+    border-radius:50%;
+
+
+
+    background:
+
+    rgba(59,130,246,.12);
+
+
+
+    filter:blur(80px);
+
+
+    z-index:-1;
+
+}
+
+
+
+body::after{
+
+    content:"";
+
+
+    position:fixed;
+
+
+    width:320px;
+
+
+    height:320px;
+
+
+    bottom:-120px;
+
+
+    left:-100px;
+
+
+    border-radius:50%;
+
+
+
+    background:
+
+    rgba(34,197,94,.08);
+
+
+
+    filter:blur(80px);
+
+
+    z-index:-1;
+
+}
+
+
+
+/*=========================
+END
+CIVICEYE AI REGISTER
+=========================*/
