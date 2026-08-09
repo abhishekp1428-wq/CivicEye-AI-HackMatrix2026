@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Reports — CivicEye AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500;600&family=Hind:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style/dashboard.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="dashboard.html" class="brand-mark" style="text-decoration:none;">
+      <span class="glyph">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01"/></svg>
+      </span>
+      <span>Civic<em>Eye</em> AI</span>
+    </a>
+
+    <ul class="nav">
+      <li><a href="dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Dashboard</a></li>
+      <li><a href="my-issues.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>My Issues</a></li>
+      <li><a href="my-reports.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h8l6 6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M14 3v6h6"/></svg>My Reports</a></li>
+      <li><a href="notifications.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Notifications</a></li>
+      <li><a href="track-status.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Track Status</a></li>
+      <li><a href="profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4.5 5-6 8-6s6.5 1.5 8 6"/></svg>Profile</a></li>
+      <li><a href="settings.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>Settings</a></li>
+    </ul>
+
+    <a href="login.html" class="logout" id="logoutBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+      Logout
+    </a>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <h1>My Reports</h1>
+      <div class="topbar-right">
+        <div class="bell">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </div>
+        <div class="user">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Abhishek" alt="">
+          <div class="who">
+            <div class="name" id="userName">Loading...</div>
+            <div class="role">Citizen</div>
+          </div>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="welcome-row">
+        <div class="welcome">
+          <h2>My Reports</h2>
+          <p>Department-wise aur month-wise breakdown of your filed complaints.</p>
+        </div>
+      </div>
+
+      <!-- SUMMARY CARD -->
+      <div class="panel-card" style="margin-bottom:20px; padding:20px 24px;">
+        <div style="font-size:13px; color:#94A3B8; font-weight:600; text-transform:uppercase; letter-spacing:0.04em;">
+          Total Complaints Filed
+        </div>
+        <div id="totalCount" style="font-size:32px; font-weight:700; color:#111827; margin-top:4px;">
+          —
+        </div>
+      </div>
+
+      <div class="grid-2">
+
+        <!-- DEPARTMENT-WISE PANEL -->
+        <div class="panel-card">
+          <div class="head">
+            <h3>Department-wise Complaints</h3>
+          </div>
+          <div id="departmentChart" style="padding: 8px 4px; display:flex; flex-direction:column; gap:14px;">
+            <p style="color:#94A3B8; font-size:13.5px;">Loading...</p>
+          </div>
+        </div>
+
+        <!-- MONTH-WISE PANEL -->
+        <div class="panel-card">
+          <div class="head">
+            <h3>Month-wise Complaints</h3>
+          </div>
+          <div id="monthChart" style="padding: 8px 4px; display:flex; flex-direction:column; gap:14px;">
+            <p style="color:#94A3B8; font-size:13.5px;">Loading...</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- STATUS-WISE PANEL -->
+      <div class="panel-card" style="margin-top:20px;">
+        <div class="head">
+          <h3>Status-wise Breakdown</h3>
+        </div>
+        <div id="statusChart" style="padding: 8px 4px; display:flex; flex-direction:column; gap:14px;">
+          <p style="color:#94A3B8; font-size:13.5px;">Loading...</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../js/my-reports.js"></script>
+</body>
+</html>
