@@ -3,7 +3,7 @@
         UPLOAD JAVASCRIPT
 ==================================================*/
 
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "https://civiceye-ai-hackmatrix2026-1.onrender.com";
 
 const captureBox = document.getElementById("captureBox");
 const fileInput = document.getElementById("fileInput");

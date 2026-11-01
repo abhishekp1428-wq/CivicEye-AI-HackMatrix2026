@@ -1,4 +1,4 @@
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "https://civiceye-ai-hackmatrix2026-1.onrender.com";
 
 document.getElementById("adminLoginForm").addEventListener("submit", async function (e) {
 
