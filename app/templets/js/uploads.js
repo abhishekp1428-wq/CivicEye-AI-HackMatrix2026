@@ -10,12 +10,16 @@ const fileInput = document.getElementById("fileInput");
 const preview = document.getElementById("preview");
 const placeholder = document.getElementById("placeholder");
 const retakeBtn = document.getElementById("retakeBtn");
+const removeImageBtn = document.getElementById("removeImageBtn");
 const analyzeBtn = document.getElementById("analyzeBtn");
 const analysisPanel = document.getElementById("analysisPanel");
+const analysisResults = document.getElementById("analysisResults");
+const analysisStatus = document.getElementById("analysisStatus");
 const submitBtn = document.getElementById("submitBtn");
 const toast = document.getElementById("toast");
 const locationInput = document.getElementById("location");
 const detectLocationBtn = document.getElementById("detectLocationBtn");
+const locationIconBtn = document.getElementById("locationIconBtn");
 const locationStatus = document.getElementById("locationStatus");
 
 let selectedFile = null;
@@ -43,6 +47,13 @@ captureBox.onclick = function () {
     }
 };
 
+captureBox.addEventListener("keydown", event => {
+    if ((event.key === "Enter" || event.key === " ") && preview.style.display === "none") {
+        event.preventDefault();
+        fileInput.click();
+    }
+});
+
 
 /*=========================
 IMAGE SELECT
@@ -55,8 +66,8 @@ fileInput.addEventListener("change", function (e) {
     if (!file) return;
 
     selectedFile = file;
-    currentComplaint = null;
-    analysisPanel.style.display = "none";
+    resetAnalysis();
+    analyzeBtn.disabled = false;
 
     const reader = new FileReader();
 
@@ -65,7 +76,7 @@ fileInput.addEventListener("change", function (e) {
         preview.style.display = "block";
         placeholder.style.display = "none";
         retakeBtn.style.display = "inline-block";
-        analyzeBtn.style.display = "inline-block";
+        removeImageBtn.hidden = false;
     };
 
     reader.readAsDataURL(file);
@@ -74,8 +85,7 @@ fileInput.addEventListener("change", function (e) {
 
 ["title", "location"].forEach(id => {
     document.getElementById(id).addEventListener("input", () => {
-        currentComplaint = null;
-        analysisPanel.style.display = "none";
+        resetAnalysis();
         if (id === "location" && locationWasDetected) {
             locationWasDetected = false;
             locationStatus.textContent = "Location edited manually.";
@@ -83,7 +93,19 @@ fileInput.addEventListener("change", function (e) {
     });
 });
 
-detectLocationBtn.addEventListener("click", () => {
+function resetAnalysis() {
+    currentComplaint = null;
+    analysisResults.hidden = true;
+    submitBtn.hidden = true;
+    analyzeBtn.hidden = false;
+    document.getElementById("resType").textContent = "Waiting for analysis";
+    document.getElementById("resSeverity").textContent = "—";
+    document.getElementById("estimatedTime").textContent = "After review";
+    analysisStatus.classList.remove("complete");
+    analysisStatus.innerHTML = '<span class="live-dot"></span> Ready to Analyze';
+}
+
+function detectCurrentLocation() {
     if (!navigator.geolocation) {
         locationStatus.textContent = "Location detection is not supported by this browser.";
         return;
@@ -139,7 +161,7 @@ detectLocationBtn.addEventListener("click", () => {
                 locationInput.value = placeName;
                 locationInput.dispatchEvent(new Event("input", { bubbles: true }));
                 locationWasDetected = true;
-                locationStatus.textContent = `Place detected (GPS accuracy about ${Math.round(accuracy)} m). Edit if needed.`;
+                locationStatus.textContent = `Place detected · GPS accuracy about ${Math.round(accuracy)} m. Edit if needed.`;
             } catch (error) {
                 console.error("Could not look up the current place name:", error);
                 locationStatus.textContent = "Place name could not be loaded. Coordinates were kept; you can enter a place name manually.";
@@ -158,7 +180,10 @@ detectLocationBtn.addEventListener("click", () => {
         },
         { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
     );
-});
+}
+
+detectLocationBtn.addEventListener("click", detectCurrentLocation);
+locationIconBtn.addEventListener("click", detectCurrentLocation);
 
 
 /*=========================
@@ -167,14 +192,17 @@ RETAKE IMAGE
 
 retakeBtn.onclick = function () {
     selectedFile = null;
-    currentComplaint = null;
+    resetAnalysis();
     preview.style.display = "none";
     placeholder.style.display = "block";
-    analysisPanel.style.display = "none";
     retakeBtn.style.display = "none";
-    analyzeBtn.style.display = "none";
+    removeImageBtn.hidden = true;
+    analyzeBtn.disabled = true;
     fileInput.value = "";
 };
+
+removeImageBtn.addEventListener("click", () => retakeBtn.click());
+removeImageBtn.addEventListener("click", event => event.stopPropagation());
 
 
 /*=========================
@@ -202,8 +230,9 @@ analyzeBtn.onclick = async function () {
     analyzeBtn.disabled = true;
     analyzeBtn.textContent = "Analyzing...";
 
-    currentComplaint = null;
-    analysisPanel.style.display = "none";
+    resetAnalysis();
+    analysisStatus.classList.remove("complete");
+    analysisStatus.textContent = "Analyzing issue...";
 
     const formData = new FormData();
     formData.append("title", title);
@@ -224,6 +253,7 @@ analyzeBtn.onclick = async function () {
 
         if (!response.ok) {
             alert(data.detail);
+            analysisStatus.textContent = "Analysis failed. Try again.";
             analyzeBtn.disabled = false;
             analyzeBtn.textContent = "Analyze with AI";
             return;
@@ -243,13 +273,24 @@ analyzeBtn.onclick = async function () {
         document.getElementById("resDept").textContent = data.ai_analysis.department;
         document.getElementById("resDescription").textContent = data.ai_analysis.description;
         document.getElementById("resPriority").textContent = data.ai_analysis.severity;
-        document.getElementById("resLocation").textContent = location;
+        const estimatedTimes = {
+            High: "1–3 Days",
+            Medium: "3–5 Days",
+            Low: "5–7 Days"
+        };
+        document.getElementById("estimatedTime").textContent =
+            estimatedTimes[data.ai_analysis.severity] || "After review";
 
-        analysisPanel.style.display = "block";
+        analysisResults.hidden = false;
+        submitBtn.hidden = false;
+        analyzeBtn.hidden = true;
+        analysisStatus.classList.add("complete");
+        analysisStatus.innerHTML = '<span class="live-dot"></span> Analysis Complete';
         analysisPanel.scrollIntoView({ behavior: "smooth", block: "start" });
 
     } catch (error) {
         console.log(error);
+        analysisStatus.textContent = "Analysis failed. Try again.";
         alert("Server Connection Failed");
     }
 
