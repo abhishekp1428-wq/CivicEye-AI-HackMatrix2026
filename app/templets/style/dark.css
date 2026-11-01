@@ -1,0 +1,199 @@
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --accent:#60a5fa;
+  --accent-soft:#172c4e;
+  --paper:#111d2e;
+  --ink:#e7edf7;
+  --slate:#a7b3c5;
+  --hairline:#28364a;
+  --canvas:#0b1220;
+  --amber-soft:#3a2b17;
+  --ok-soft:#123528;
+  --danger-soft:#3a2024;
+  --danger:#fb7185;
+}
+
+body,
+.sidebar,
+.topbar,
+.date-card,
+.stat-card,
+.panel-card{
+  transition:background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.theme-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:38px;
+  padding:0 12px;
+  border:1px solid var(--hairline);
+  border-radius:10px;
+  background:var(--paper);
+  color:var(--ink);
+  font:500 13px 'Hind',sans-serif;
+  cursor:pointer;
+}
+
+.theme-toggle:hover{
+  background:var(--canvas);
+}
+
+.theme-toggle:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:2px;
+}
+
+.brand-mark > span{
+  color:var(--ink);
+}
+
+.theme-switch{
+  position:relative;
+  display:inline-block;
+  width:46px;
+  height:26px;
+}
+
+.theme-switch input{
+  width:1px;
+  height:1px;
+  opacity:0;
+}
+
+.theme-switch .slider{
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  background:#cbd5e1;
+  cursor:pointer;
+  transition:background-color .2s ease;
+}
+
+.theme-switch .slider:before{
+  position:absolute;
+  content:"";
+  width:20px;
+  height:20px;
+  top:3px;
+  left:3px;
+  border-radius:50%;
+  background:#fff;
+  transition:transform .2s ease;
+}
+
+.theme-switch input:checked + .slider{
+  background:#2563eb;
+}
+
+.theme-switch input:checked + .slider:before{
+  transform:translateX(20px);
+}
+
+.theme-switch input:focus-visible + .slider{
+  outline:2px solid var(--accent);
+  outline-offset:2px;
+}
+
+:root[data-theme="dark"] .theme-switch .slider{
+  background:#475569;
+}
+
+:root[data-theme="dark"] .theme-switch input:checked + .slider{
+  background:#2563eb;
+}
+
+:root[data-theme="dark"] .theme-switch .slider:before{
+  background:#f8fafc;
+}
+
+:root[data-theme="dark"] .settings input:not([type="checkbox"]),
+:root[data-theme="dark"] input[type="text"],
+:root[data-theme="dark"] input[type="email"],
+:root[data-theme="dark"] input[type="password"]{
+  background:var(--paper) !important;
+  border-color:var(--hairline) !important;
+  color:var(--ink);
+}
+
+:root[data-theme="dark"] .filter-bar input,
+:root[data-theme="dark"] .filter-bar select{
+  background:var(--paper) !important;
+  border-color:var(--hairline) !important;
+  color:var(--ink) !important;
+}
+
+:root[data-theme="dark"] .issues-table-panel{
+  background:var(--paper) !important;
+  border-color:var(--hairline) !important;
+}
+
+:root[data-theme="dark"] .issues-table-panel table{
+  color:var(--ink);
+}
+
+:root[data-theme="dark"] .issues-table-panel thead{
+  background:var(--canvas) !important;
+  border-color:var(--hairline) !important;
+  color:var(--slate) !important;
+}
+
+:root[data-theme="dark"] .issues-table-panel tbody tr{
+  border-color:var(--hairline) !important;
+}
+
+:root[data-theme="dark"] .issues-table-panel tbody td{
+  color:var(--ink);
+}
+
+:root[data-theme="dark"] .issues-table-panel .severity{
+  background:var(--canvas) !important;
+  color:var(--slate);
+}
+
+:root[data-theme="dark"] .issues-table-panel .status-badge{
+  background:var(--accent-soft) !important;
+  color:var(--accent) !important;
+}
+
+:root[data-theme="dark"] #timelineModal > div{
+  background:var(--paper) !important;
+  color:var(--ink);
+}
+
+:root[data-theme="dark"] #timelineModal h3{
+  color:var(--ink) !important;
+}
+
+:root[data-theme="dark"] #timelineContainer > div{
+  background:var(--canvas) !important;
+  border-color:var(--hairline) !important;
+}
+
+:root[data-theme="dark"] #timelineContainer p{
+  color:var(--slate) !important;
+}
+
+.report-label,
+.report-empty{
+  color:var(--slate);
+  font-size:13.5px;
+}
+
+.report-total{
+  color:var(--ink);
+}
+
+.report-chart-label{
+  color:var(--ink);
+  font-weight:500;
+}
+
+.report-chart-count{
+  color:var(--slate);
+}
+
+.report-bar-track{
+  background:var(--hairline);
+}

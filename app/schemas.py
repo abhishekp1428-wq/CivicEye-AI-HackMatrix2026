@@ -38,6 +38,11 @@ class ComplaintCreate(BaseModel):
     severity: Optional[str] = None
 
 
+class ComplaintSubmit(BaseModel):
+    analysis_id: str
+    note: Optional[str] = None
+
+
 class ComplaintUpdate(BaseModel):
     title: str
     description: str

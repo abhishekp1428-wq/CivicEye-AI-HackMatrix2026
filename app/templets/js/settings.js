@@ -131,6 +131,7 @@ async function saveProfile(e) {
         localStorage.setItem("user_name", data.user_name);
         localStorage.setItem("email", data.email);
         localStorage.setItem("mobile", data.mobile);
+        if (data.access_token) localStorage.setItem("token", data.access_token);
 
         document.getElementById("userName").textContent = data.user_name;
         document.getElementById("password").value = "";

@@ -5,13 +5,15 @@
 ==================================================*/
 
 (function () {
-    const savedTheme = localStorage.getItem("theme") || "light";
+    const savedTheme = localStorage.getItem("theme") === "dark" ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", savedTheme);
 })();
 
 function setTheme(theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
+    const selectedTheme = theme === "dark" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", selectedTheme);
+    localStorage.setItem("theme", selectedTheme);
+    syncThemeControls();
 }
 
 function toggleTheme() {
@@ -21,15 +23,36 @@ function toggleTheme() {
     return next;
 }
 
-// Keep any theme toggle switch on the page in sync with the current theme
+function syncThemeControls() {
+    const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+    const themeToggle = document.getElementById("themeToggle");
+    const themeToggleButton = document.getElementById("themeToggleButton");
+
+    if (themeToggle) {
+        themeToggle.checked = isDark;
+    }
+
+    if (themeToggleButton) {
+        themeToggleButton.setAttribute("aria-pressed", String(isDark));
+        themeToggleButton.setAttribute("aria-label", `Switch to ${isDark ? "light" : "dark"} theme`);
+        themeToggleButton.textContent = isDark ? "☀ Light mode" : "☾ Dark mode";
+    }
+}
+
+// Keep theme controls on the page in sync with the current theme.
 document.addEventListener("DOMContentLoaded", () => {
     const themeToggle = document.getElementById("themeToggle");
     if (themeToggle) {
-        const current = document.documentElement.getAttribute("data-theme") || "light";
-        themeToggle.checked = current === "dark";
+        syncThemeControls();
 
         themeToggle.addEventListener("change", () => {
             setTheme(themeToggle.checked ? "dark" : "light");
         });
+    }
+
+    const themeToggleButton = document.getElementById("themeToggleButton");
+    if (themeToggleButton) {
+        syncThemeControls();
+        themeToggleButton.addEventListener("click", toggleTheme);
     }
 });

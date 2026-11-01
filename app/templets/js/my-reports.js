@@ -88,7 +88,7 @@ function renderBarChart(containerId, items, labelKey) {
     container.innerHTML = "";
 
     if (!items || items.length === 0) {
-        container.innerHTML = `<p style="color:#94A3B8; font-size:13.5px;">No data yet.</p>`;
+        container.innerHTML = `<p class="report-empty">No data yet.</p>`;
         return;
     }
 
@@ -105,10 +105,10 @@ function renderBarChart(containerId, items, labelKey) {
 
         row.innerHTML = `
             <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:4px;">
-                <span style="color:#374151; font-weight:500;">${escapeHtml(String(label))}</span>
-                <span style="color:#6B7280;">${count}</span>
+                <span class="report-chart-label">${escapeHtml(String(label))}</span>
+                <span class="report-chart-count">${count}</span>
             </div>
-            <div style="background:#F3F4F6; border-radius:6px; height:10px; overflow:hidden;">
+            <div class="report-bar-track" style="border-radius:6px; height:10px; overflow:hidden;">
                 <div style="background:${color}; width:${pct}%; height:100%; border-radius:6px;"></div>
             </div>
         `;

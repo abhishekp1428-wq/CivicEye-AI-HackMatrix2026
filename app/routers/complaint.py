@@ -6,12 +6,13 @@ from app.database import get_db
 from app.services.ai_service import analyze_image
 from app.dependencies import get_current_user
 import json
-import os
+from pathlib import Path
+from uuid import uuid4
 
 router = APIRouter()
 
-UPLOAD_DIR = "app/uploads"
-os.makedirs(UPLOAD_DIR, exist_ok=True)
+UPLOAD_DIR = Path(__file__).resolve().parents[1] / "uploads"
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def complaint_to_dict(complaint):
@@ -20,7 +21,10 @@ def complaint_to_dict(complaint):
         "id": complaint.id,
         "title": complaint.title,
         "description": complaint.description,
-        "image": complaint.image,
+        "image": (
+            f"http://127.0.0.1:8000/uploads/{Path(complaint.image).name}"
+            if complaint.image else None
+        ),
         "location": complaint.location,
         "status": complaint.status,
         "department": complaint.department,
@@ -29,71 +33,114 @@ def complaint_to_dict(complaint):
     }
 
 
-@router.post("/complaints")
-def create_complaint(
+STAGING_DIR = Path(__file__).resolve().parents[1] / "staged_uploads"
+STAGING_DIR.mkdir(parents=True, exist_ok=True)
+
+
+@router.post("/complaints/analyze")
+def analyze_complaint(
     title: str = Form(...),
     location: str = Form(...),
     image: UploadFile = File(...),
-    db: Session = Depends(get_db),
-    current_user: models.User = Depends(get_current_user)
+    current_user: models.User = Depends(get_current_user),
 ):
+    """Analyze an image and stage it; this route does not create a complaint."""
+    suffix = Path(image.filename or "upload.jpg").suffix.lower()
+    if suffix not in {".jpg", ".jpeg", ".png", ".webp"}:
+        raise HTTPException(status_code=400, detail="Upload a JPG, PNG, or WEBP image")
 
-    # Save Image
-    file_path = os.path.join(UPLOAD_DIR, image.filename)
-
-    with open(file_path, "wb") as buffer:
+    analysis_id = uuid4().hex
+    staged_image = STAGING_DIR / f"{analysis_id}{suffix}"
+    metadata_path = STAGING_DIR / f"{analysis_id}.json"
+    with staged_image.open("wb") as buffer:
         buffer.write(image.file.read())
 
-    # AI Analysis
+    default_ai = {
+        "problem": "Not Available",
+        "severity": "Medium",
+        "department": "General",
+        "description": "Automatic analysis unavailable. Please review manually.",
+    }
     try:
-        ai_result = analyze_image(file_path)
-
-        print("AI RESPONSE =====>", ai_result)
-
+        ai_result = analyze_image(str(staged_image))
         if isinstance(ai_result, str):
-
-            ai_result = (
-                ai_result
-                .replace("<think>", "")
-                .replace("</think>", "")
-                .strip()
-            )
-
+            ai_result = ai_result.replace("<think>", "").replace("</think>", "").strip()
             if "```json" in ai_result:
-                ai_result = ai_result.split("```json")[1]
-                ai_result = ai_result.split("```")[0]
-
-            ai_result = ai_result.strip()
+                ai_result = ai_result.split("```json", 1)[1].split("```", 1)[0].strip()
             ai_result = json.loads(ai_result)
+        if not isinstance(ai_result, dict):
+            raise ValueError("AI result is not a JSON object")
+        for key, value in default_ai.items():
+            if not ai_result.get(key):
+                ai_result[key] = value
+    except Exception as exc:
+        print("AI ERROR =====>", exc)
+        ai_result = default_ai
 
-        required_keys = ["problem", "severity", "department", "description"]
-        for key in required_keys:
-            if key not in ai_result:
-                ai_result[key] = "Not Available"
+    metadata = {
+        "user_id": current_user.id,
+        "title": title,
+        "location": location,
+        "image_name": staged_image.name,
+        "analysis": ai_result,
+    }
+    metadata_path.write_text(json.dumps(metadata), encoding="utf-8")
+    return {"analysis_id": analysis_id, "ai_analysis": ai_result}
 
-    except Exception as e:
-        print("AI ERROR =====>", e)
-        raise HTTPException(
-            status_code=500,
-            detail=f"AI Analysis Failed: {str(e)}"
+
+@router.post("/complaints")
+def create_complaint(
+    payload: schemas.ComplaintSubmit,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Create the complaint only after the user confirms submission."""
+    if not payload.analysis_id.isalnum():
+        raise HTTPException(status_code=400, detail="Invalid analysis reference")
+
+    metadata_path = STAGING_DIR / f"{payload.analysis_id}.json"
+    if not metadata_path.is_file():
+        raise HTTPException(status_code=404, detail="Analysis expired or already submitted. Please analyze again.")
+
+    try:
+        metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        raise HTTPException(status_code=400, detail="Could not read the analysis. Please analyze again.")
+
+    if metadata.get("user_id") != current_user.id:
+        raise HTTPException(status_code=403, detail="This analysis belongs to another user")
+
+    staged_image = STAGING_DIR / metadata["image_name"]
+    if not staged_image.is_file():
+        raise HTTPException(status_code=404, detail="Uploaded image is missing. Please analyze again.")
+
+    final_image = UPLOAD_DIR / staged_image.name
+    staged_image.replace(final_image)
+    analysis = metadata["analysis"]
+    description = analysis["description"]
+    if payload.note and payload.note.strip():
+        description = f"{description}\n\nAdditional Note: {payload.note.strip()}"
+
+    try:
+        complaint = crud.create_complaint(
+            db=db,
+            title=metadata["title"],
+            description=description,
+            image=str(final_image),
+            location=metadata["location"],
+            department=analysis["department"],
+            severity=analysis["severity"],
+            user_id=current_user.id,
         )
+    except Exception:
+        db.rollback()
+        final_image.replace(staged_image)
+        raise
 
-    # Save Complaint — tagged with the logged-in user's id
-    complaint = crud.create_complaint(
-        db=db,
-        title=title,
-        description=ai_result["description"],
-        image=file_path,
-        location=location,
-        department=ai_result["department"],
-        severity=ai_result["severity"],
-        user_id=current_user.id
-    )
-
+    metadata_path.unlink(missing_ok=True)
     return {
-        "message": "Complaint created successfully",
-        "ai_analysis": ai_result,
-        "complaint": complaint_to_dict(complaint)
+        "message": "Complaint submitted successfully",
+        "complaint": complaint_to_dict(complaint),
     }
 
 

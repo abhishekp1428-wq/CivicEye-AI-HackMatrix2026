@@ -38,9 +38,14 @@ def reports_summary(
 
     # ---------- Month-wise breakdown ----------
     # DATE_FORMAT works on MySQL. Groups complaints by "YYYY-MM" of created_at.
+    month_expr = (
+        func.strftime("%Y-%m", models.Complaint.created_at)
+        if db.bind.dialect.name == "sqlite"
+        else func.date_format(models.Complaint.created_at, "%Y-%m")
+    )
     month_rows = (
         db.query(
-            func.date_format(models.Complaint.created_at, "%Y-%m").label("month"),
+            month_expr.label("month"),
             func.count(models.Complaint.id)
         )
         .filter(

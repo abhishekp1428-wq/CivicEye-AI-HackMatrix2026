@@ -25,3 +25,16 @@ class Complaint(base):
      department=Column(String(100))
      severity=Column(String(50))
      created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+
+class Notification(base):
+     __tablename__ = "notifications"
+
+     id = Column(Integer, primary_key=True, index=True)
+     user_id = Column(Integer, ForeignKey("userdata.id", ondelete="CASCADE"), nullable=False, index=True)
+     complaint_id = Column(Integer, ForeignKey("complaints.id", ondelete="SET NULL"), nullable=True, index=True)
+     complaint_title = Column(String(500), nullable=False)
+     message = Column(String(1000), nullable=False)
+     status = Column(String(50), nullable=False)
+     is_read = Column(Boolean, nullable=False, default=False)
+     created_at = Column(DateTime(timezone=True), server_default=func.now(), index=True)

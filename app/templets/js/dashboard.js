@@ -46,7 +46,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    loadDashboardData();
+    if (document.querySelector(".stats")) {
+        loadDashboardData();
+    }
+    loadUnreadNotificationCount();
 
 });
 
@@ -82,6 +85,29 @@ async function loadDashboardData() {
         console.log("Error loading dashboard data:", error);
     }
 
+}
+
+async function loadUnreadNotificationCount() {
+    const badge = document.getElementById("notificationCount");
+    const token = localStorage.getItem("token");
+    if (!badge || !token) return;
+
+    try {
+        const response = await fetch(`${API_BASE}/notifications?limit=1`, {
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        if (!response.ok) {
+            throw new Error(`Could not load unread notification count (${response.status})`);
+        }
+
+        const data = await response.json();
+        const count = Number(data.unread_count) || 0;
+        badge.textContent = count > 99 ? "99+" : String(count);
+        badge.hidden = count === 0;
+        badge.setAttribute("aria-label", `${count} unread notifications`);
+    } catch (error) {
+        console.error("Could not load unread notification count:", error);
+    }
 }
 
 

@@ -58,11 +58,84 @@ async function loadIssues() {
 
         if (Array.isArray(data)) {
             renderTable(data);
+            renderIssueCharts(data);
         }
 
     } catch (error) {
         console.error("Error fetching issues:", error);
     }
+}
+
+function renderIssueCharts(issues) {
+    renderIssueBreakdown("issueStatusChart", issues, issue => issue.status || "Pending", {
+        "Pending": "#F59E0B",
+        "In Progress": "#3B82F6",
+        "Resolved": "#10B981",
+        "Rejected": "#EF4444"
+    });
+    renderIssueBreakdown("issueDepartmentChart", issues, issue => issue.department || "Unknown", {});
+    renderIssueBreakdown("issueSeverityChart", issues, issue => issue.severity || "Unknown", {
+        "High": "#EF4444",
+        "Medium": "#F59E0B",
+        "Low": "#10B981"
+    });
+}
+
+function renderIssueBreakdown(containerId, issues, getLabel, colors) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.replaceChildren();
+
+    if (issues.length === 0) {
+        const emptyMessage = document.createElement("p");
+        emptyMessage.className = "issue-chart-empty";
+        emptyMessage.textContent = "No complaints match the current filters.";
+        container.appendChild(emptyMessage);
+        return;
+    }
+
+    const counts = new Map();
+    issues.forEach(issue => {
+        const label = String(getLabel(issue));
+        counts.set(label, (counts.get(label) || 0) + 1);
+    });
+
+    const entries = [...counts.entries()]
+        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+    const visibleEntries = entries.slice(0, 6);
+    if (entries.length > visibleEntries.length) {
+        const remainingCount = entries.slice(6).reduce((total, entry) => total + entry[1], 0);
+        visibleEntries.push(["Other", remainingCount]);
+    }
+
+    const maxCount = Math.max(...visibleEntries.map(([, count]) => count));
+    visibleEntries.forEach(([label, count]) => {
+        const row = document.createElement("div");
+        row.className = "issue-chart-row";
+
+        const heading = document.createElement("div");
+        heading.className = "issue-chart-heading";
+
+        const labelElement = document.createElement("span");
+        labelElement.textContent = label;
+
+        const countElement = document.createElement("span");
+        countElement.textContent = String(count);
+        heading.append(labelElement, countElement);
+
+        const track = document.createElement("div");
+        track.className = "issue-chart-track";
+
+        const bar = document.createElement("div");
+        bar.className = "issue-chart-bar";
+        bar.style.width = `${(count / maxCount) * 100}%`;
+        bar.style.backgroundColor = colors[label] || "#3B82F6";
+        track.appendChild(bar);
+
+        row.append(heading, track);
+        container.appendChild(row);
+    });
 }
 
 function renderTable(issues) {

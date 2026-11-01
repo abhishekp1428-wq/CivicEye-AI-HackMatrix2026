@@ -70,8 +70,14 @@
                     id="location"
                     name="location"
                     placeholder="Enter Complaint Location"
+                    aria-describedby="locationStatus"
                     required
                 >
+
+                <button type="button" id="detectLocationBtn" class="location-btn">
+                    Use my current location
+                </button>
+                <small id="locationStatus" class="location-status" role="status" aria-live="polite"></small>
 
             </div>
 

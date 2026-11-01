@@ -3,6 +3,7 @@ from app import schemas, crud, models
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.dependencies import get_current_user
+from app.utils.jwt_handler import create_access_token
 
 router = APIRouter()
 
@@ -38,7 +39,9 @@ def update_user(
         "id": existing_user.id,
         "user_name": existing_user.user_name,
         "email": existing_user.email,
-        "mobile": existing_user.mobile
+        "mobile": existing_user.mobile,
+        "access_token": create_access_token(data={"sub": existing_user.email}),
+        "token_type": "bearer"
     }
 
 

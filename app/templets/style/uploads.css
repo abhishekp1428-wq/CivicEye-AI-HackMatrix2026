@@ -1125,6 +1125,35 @@ body::after{
 
 }
 
+.location-btn{
+    align-self:flex-start;
+    margin-top:10px;
+    padding:10px 14px;
+    border:1px solid rgba(59,130,246,.35);
+    border-radius:10px;
+    background:rgba(59,130,246,.1);
+    color:#1d4ed8;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.location-btn:hover:not(:disabled){
+    background:rgba(59,130,246,.18);
+}
+
+.location-btn:disabled{
+    cursor:wait;
+    opacity:.65;
+}
+
+.location-status{
+    min-height:1.2em;
+    margin-top:7px;
+    color:#526783;
+    font-size:13px;
+}
+
 
 /*=========================================
         TEXTAREA

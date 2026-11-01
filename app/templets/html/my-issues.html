@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Issues — CivicEye AI</title>
-<link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
-<link href="[https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500;600&family=Hind:wght@400;500;600&display=swap](https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500;600&family=Hind:wght@400;500;600&display=swap)" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500;600&family=Hind:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style/dashboard.css">
+<link rel="stylesheet" href="../style/dark.css">
+<script src="../js/theme.js"></script>
 </head>
 <body>
 
@@ -23,11 +25,10 @@
 
     <ul class="nav">
       <li><a href="dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Dashboard</a></li>
-      <li><a href="myisuu.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>My Issues</a></li>
+      <li><a href="my-issues.html" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>My Issues</a></li>
       <li><a href="my-reports.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h8l6 6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M14 3v6h6"/></svg>My Reports</a></li>
-      <li><a href="notifications.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Notifications</a></li>
-      <li><a href="track-status.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Track Status</a></li>
-      <li><a href="profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4.5 5-6 8-6s6.5 1.5 8 6"/></svg>Profile</a></li>
+      <li><a href="notification.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Notifications</a></li>
+      <li><a href="settings.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4.5 5-6 8-6s6.5 1.5 8 6"/></svg>Profile</a></li>
       <li><a href="settings.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>Settings</a></li>
     </ul>
 
@@ -42,9 +43,10 @@
     <header class="topbar">
       <h1>My Issues</h1>
       <div class="topbar-right">
-        <div class="bell">
+        <button type="button" class="theme-toggle" id="themeToggleButton" aria-label="Switch to dark theme" aria-pressed="false">☾ Dark mode</button>
+        <a class="bell" href="notification.html" aria-label="Notifications">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-        </div>
+        </a>
         <div class="user">
           <img src="[https://api.dicebear.com/7.x/avataaars/svg?seed=Abhishek](https://api.dicebear.com/7.x/avataaars/svg?seed=Abhishek)" alt="">
           <div class="who">
@@ -70,15 +72,30 @@
         
         <select id="statusFilter" style="padding: 10px 14px; border-radius: 8px; border: 1px solid #d1d5db; font-size: 14px; background: white; cursor: pointer;">
           <option value="All">All Status</option>
-          <option value="Submitted">Submitted</option>
+          <option value="Pending">Pending</option>
           <option value="In Progress">In Progress</option>
           <option value="Resolved">Resolved</option>
           <option value="Rejected">Rejected</option>
         </select>
       </div>
 
+      <div class="issue-chart-grid">
+        <section class="panel-card issue-chart-card">
+          <h3>Status breakdown</h3>
+          <div id="issueStatusChart" class="issue-chart" aria-live="polite"></div>
+        </section>
+        <section class="panel-card issue-chart-card">
+          <h3>Department breakdown</h3>
+          <div id="issueDepartmentChart" class="issue-chart" aria-live="polite"></div>
+        </section>
+        <section class="panel-card issue-chart-card">
+          <h3>Severity breakdown</h3>
+          <div id="issueSeverityChart" class="issue-chart" aria-live="polite"></div>
+        </section>
+      </div>
+
       <!-- ISSUES TABLE PANEL -->
-      <div class="panel-card" style="padding: 0; overflow-x: auto; background: white; border-radius: 10px; border: 1px solid #e5e7eb;">
+      <div class="panel-card issues-table-panel" style="padding: 0; overflow-x: auto; background: white; border-radius: 10px; border: 1px solid #e5e7eb;">
         <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
           <thead style="background: #f9fafb; border-bottom: 1px solid #e5e7eb; color: #4b5563;">
             <tr>

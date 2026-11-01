@@ -70,11 +70,25 @@ def update_complaint_admin(
     if complaint is None:
         raise HTTPException(status_code=404, detail="Complaint not found")
 
+    previous_status = complaint.status
     if payload.status is not None:
         complaint.status = payload.status
 
     if payload.department is not None:
         complaint.department = payload.department
+
+    if (
+        payload.status is not None
+        and complaint.status != previous_status
+        and complaint.user_id is not None
+    ):
+        db.add(models.Notification(
+            user_id=complaint.user_id,
+            complaint_id=complaint.id,
+            complaint_title=complaint.title or f"Complaint #{complaint.id}",
+            message=f"Your complaint status changed from {previous_status or 'Pending'} to {complaint.status}.",
+            status=complaint.status,
+        ))
 
     db.commit()
     db.refresh(complaint)

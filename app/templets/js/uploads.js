@@ -14,9 +14,13 @@ const analyzeBtn = document.getElementById("analyzeBtn");
 const analysisPanel = document.getElementById("analysisPanel");
 const submitBtn = document.getElementById("submitBtn");
 const toast = document.getElementById("toast");
+const locationInput = document.getElementById("location");
+const detectLocationBtn = document.getElementById("detectLocationBtn");
+const locationStatus = document.getElementById("locationStatus");
 
 let selectedFile = null;
 let currentComplaint = null;
+let locationWasDetected = false;
 
 function getToken() {
     const token = localStorage.getItem("token");
@@ -51,6 +55,8 @@ fileInput.addEventListener("change", function (e) {
     if (!file) return;
 
     selectedFile = file;
+    currentComplaint = null;
+    analysisPanel.style.display = "none";
 
     const reader = new FileReader();
 
@@ -64,6 +70,94 @@ fileInput.addEventListener("change", function (e) {
 
     reader.readAsDataURL(file);
 
+});
+
+["title", "location"].forEach(id => {
+    document.getElementById(id).addEventListener("input", () => {
+        currentComplaint = null;
+        analysisPanel.style.display = "none";
+        if (id === "location" && locationWasDetected) {
+            locationWasDetected = false;
+            locationStatus.textContent = "Location edited manually.";
+        }
+    });
+});
+
+detectLocationBtn.addEventListener("click", () => {
+    if (!navigator.geolocation) {
+        locationStatus.textContent = "Location detection is not supported by this browser.";
+        return;
+    }
+
+    detectLocationBtn.disabled = true;
+    locationStatus.textContent = "Requesting your current location...";
+
+    navigator.geolocation.getCurrentPosition(
+        async position => {
+            const { latitude, longitude, accuracy } = position.coords;
+            const coordinates = `Lat: ${latitude.toFixed(5)}, Lng: ${longitude.toFixed(5)}`;
+            locationInput.value = coordinates;
+            locationWasDetected = false;
+            locationInput.dispatchEvent(new Event("input", { bubbles: true }));
+            locationStatus.textContent = "Finding the nearby place name...";
+
+            try {
+                const url = new URL("https://nominatim.openstreetmap.org/reverse");
+                url.search = new URLSearchParams({
+                    format: "jsonv2",
+                    lat: latitude,
+                    lon: longitude,
+                    zoom: "18",
+                    addressdetails: "1"
+                });
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Reverse geocoding failed (${response.status})`);
+                }
+
+                const result = await response.json();
+                const address = result.address || {};
+                const locality = address.neighbourhood
+                    || address.suburb
+                    || address.city_district
+                    || address.village
+                    || address.town
+                    || address.city
+                    || address.municipality
+                    || address.county;
+                const placeName = [
+                    result.name || address.road || locality,
+                    locality,
+                    address.city || address.town || address.village,
+                    address.state
+                ].filter((part, index, parts) => part && parts.indexOf(part) === index).slice(0, 3).join(", ");
+
+                if (!placeName) {
+                    throw new Error("No nearby place name was returned");
+                }
+
+                locationInput.value = placeName;
+                locationInput.dispatchEvent(new Event("input", { bubbles: true }));
+                locationWasDetected = true;
+                locationStatus.textContent = `Place detected (GPS accuracy about ${Math.round(accuracy)} m). Edit if needed.`;
+            } catch (error) {
+                console.error("Could not look up the current place name:", error);
+                locationStatus.textContent = "Place name could not be loaded. Coordinates were kept; you can enter a place name manually.";
+            }
+
+            detectLocationBtn.disabled = false;
+        },
+        error => {
+            const messages = {
+                1: "Location permission was denied. Allow access in your browser settings or enter it manually.",
+                2: "Your location is currently unavailable. Try again or enter it manually.",
+                3: "Location detection timed out. Try again or enter it manually."
+            };
+            locationStatus.textContent = messages[error.code] || "Could not detect your location. Enter it manually.";
+            detectLocationBtn.disabled = false;
+        },
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+    );
 });
 
 
@@ -108,6 +202,9 @@ analyzeBtn.onclick = async function () {
     analyzeBtn.disabled = true;
     analyzeBtn.textContent = "Analyzing...";
 
+    currentComplaint = null;
+    analysisPanel.style.display = "none";
+
     const formData = new FormData();
     formData.append("title", title);
     formData.append("location", location);
@@ -115,7 +212,7 @@ analyzeBtn.onclick = async function () {
 
     try {
 
-        const response = await fetch(`${API_BASE}/complaints`, {
+        const response = await fetch(`${API_BASE}/complaints/analyze`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`
@@ -132,7 +229,14 @@ analyzeBtn.onclick = async function () {
             return;
         }
 
-        currentComplaint = data.complaint;
+        currentComplaint = {
+            analysis_id: data.analysis_id,
+            title,
+            location,
+            description: data.ai_analysis.description,
+            department: data.ai_analysis.department,
+            severity: data.ai_analysis.severity
+        };
 
         document.getElementById("resType").textContent = data.ai_analysis.problem;
         document.getElementById("resSeverity").textContent = data.ai_analysis.severity;
@@ -142,6 +246,7 @@ analyzeBtn.onclick = async function () {
         document.getElementById("resLocation").textContent = location;
 
         analysisPanel.style.display = "block";
+        analysisPanel.scrollIntoView({ behavior: "smooth", block: "start" });
 
     } catch (error) {
         console.log(error);
@@ -173,24 +278,17 @@ submitBtn.onclick = async function () {
 
     const note = document.getElementById("note").value.trim();
 
-    const finalDescription = note
-        ? `${currentComplaint.description}\n\nAdditional Note: ${note}`
-        : currentComplaint.description;
-
     try {
 
-        const response = await fetch(`${API_BASE}/complaints/${currentComplaint.id}`, {
-            method: "PUT",
+        const response = await fetch(`${API_BASE}/complaints`, {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
-                title: currentComplaint.title,
-                description: finalDescription,
-                image: currentComplaint.image,
-                location: currentComplaint.location,
-                department: currentComplaint.department
+                analysis_id: currentComplaint.analysis_id,
+                note
             })
         });
 

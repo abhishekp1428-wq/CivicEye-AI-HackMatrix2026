@@ -27,9 +27,14 @@ def dashboard(
     recent = base_query.order_by(models.Complaint.id.desc()).limit(5).all()
 
     # Month-wise counts for the "Issues Overview" chart
+    month_expr = (
+        func.strftime("%Y-%m", models.Complaint.created_at)
+        if db.bind.dialect.name == "sqlite"
+        else func.date_format(models.Complaint.created_at, "%Y-%m")
+    )
     month_rows = (
         db.query(
-            func.date_format(models.Complaint.created_at, "%Y-%m").label("month"),
+            month_expr.label("month"),
             func.count(models.Complaint.id)
         )
         .filter(
