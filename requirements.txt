@@ -47,3 +47,4 @@ typing_extensions==4.16.0
 urllib3==2.8.0
 uvicorn==0.51.0
 websockets==17.4
+google-genai
