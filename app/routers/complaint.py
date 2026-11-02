@@ -4,6 +4,7 @@ from app import schemas, crud, models
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.services.ai_service import analyze_image
+from app.services.title_fallback import analyze_by_title
 from app.dependencies import get_current_user
 import json
 from pathlib import Path
@@ -75,7 +76,7 @@ def analyze_complaint(
                 ai_result[key] = value
     except Exception as exc:
         print("AI ERROR =====>", exc)
-        ai_result = default_ai
+        ai_result = analyze_by_title(title)
 
     metadata = {
         "user_id": current_user.id,

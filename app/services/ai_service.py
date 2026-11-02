@@ -9,7 +9,7 @@ from google.genai import types
 
 load_dotenv(Path(__file__).resolve().parents[2] / ".env", override=False)
 
-MODEL_NAME = "gemini-2.5-flash"
+MODEL_NAME = "gemini-3.8-flash"
 
 
 def analyze_image(image_path, complaint_title=""):
