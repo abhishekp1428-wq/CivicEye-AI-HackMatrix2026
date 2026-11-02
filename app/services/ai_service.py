@@ -11,37 +11,46 @@ load_dotenv(Path(__file__).resolve().parents[2] / ".env", override=False)
 
 MODEL_NAME = "gemini-2.5-flash"
 
-PROMPT = """
-Analyze this civic issue image, such as road damage,
-garbage, water leakage or a broken streetlight.
 
-Return only valid JSON with exactly these keys:
-{
-    "problem": "short title",
-    "severity": "Low, Medium or High",
-    "department": "responsible municipal department",
-    "description": "2-3 sentence description"
-}
-Describe only visible details. Do not invent information.
-"""
-
-def analyze_image(image_path):
+def analyze_image(image_path, complaint_title=""):
     api_key = os.getenv("GEMINI_API_KEY")
+
     if not api_key:
         raise RuntimeError("GEMINI_API_KEY is not configured")
 
     path = Path(image_path)
+
     if not path.is_file():
         raise FileNotFoundError(f"Image not found: {path}")
 
     mime_type = mimetypes.guess_type(str(path))[0] or "image/jpeg"
+
+    prompt = f"""
+    Analyze this civic complaint using BOTH the title and image.
+
+    User complaint title: {complaint_title}
+
+    Identify the actual issue visible in the image.
+    Compare it with the user's title.
+    If they do not match, mention the mismatch in the description.
+
+    Return only valid JSON with exactly these keys:
+    {{
+        "problem": "short problem title",
+        "severity": "Low, Medium or High",
+        "department": "responsible municipal department",
+        "description": "2-3 sentence explanation"
+    }}
+
+    Do not invent details that are not visible.
+    """
 
     client = genai.Client(api_key=api_key)
 
     response = client.models.generate_content(
         model=MODEL_NAME,
         contents=[
-            PROMPT,
+            prompt,
             types.Part.from_bytes(
                 data=path.read_bytes(),
                 mime_type=mime_type
@@ -56,6 +65,7 @@ def analyze_image(image_path):
         raise ValueError("Gemini returned an empty response")
 
     parsed = json.loads(response.text)
+
     required = {"problem", "severity", "department", "description"}
 
     if not isinstance(parsed, dict) or set(parsed.keys()) != required:

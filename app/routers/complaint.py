@@ -62,7 +62,7 @@ def analyze_complaint(
         "description": "Automatic analysis unavailable. Please review manually.",
     }
     try:
-        ai_result = analyze_image(str(staged_image))
+        ai_result = analyze_image(str(staged_image), title)
         if isinstance(ai_result, str):
             ai_result = ai_result.replace("<think>", "").replace("</think>", "").strip()
             if "```json" in ai_result:
