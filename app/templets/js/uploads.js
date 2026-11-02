@@ -68,6 +68,7 @@ fileInput.addEventListener("change", function (e) {
     selectedFile = file;
     resetAnalysis();
     analyzeBtn.disabled = false;
+    analyzeBtn.style.display = "inline-block";
 
     const reader = new FileReader();
 
@@ -95,9 +96,11 @@ fileInput.addEventListener("change", function (e) {
 
 function resetAnalysis() {
     currentComplaint = null;
+    analysisPanel.style.display = "none";
     analysisResults.hidden = true;
     submitBtn.hidden = true;
-    analyzeBtn.hidden = false;
+    analyzeBtn.hidden = !selectedFile;
+    analyzeBtn.style.display = selectedFile ? "inline-block" : "none";
     document.getElementById("resType").textContent = "Waiting for analysis";
     document.getElementById("resSeverity").textContent = "—";
     document.getElementById("estimatedTime").textContent = "After review";
@@ -198,6 +201,7 @@ retakeBtn.onclick = function () {
     retakeBtn.style.display = "none";
     removeImageBtn.hidden = true;
     analyzeBtn.disabled = true;
+    analyzeBtn.style.display = "none";
     fileInput.value = "";
 };
 
@@ -231,6 +235,7 @@ analyzeBtn.onclick = async function () {
     analyzeBtn.textContent = "Analyzing...";
 
     resetAnalysis();
+    analysisPanel.style.display = "block";
     analysisStatus.classList.remove("complete");
     analysisStatus.textContent = "Analyzing issue...";
 
@@ -284,6 +289,7 @@ analyzeBtn.onclick = async function () {
         analysisResults.hidden = false;
         submitBtn.hidden = false;
         analyzeBtn.hidden = true;
+        analyzeBtn.style.display = "none";
         analysisStatus.classList.add("complete");
         analysisStatus.innerHTML = '<span class="live-dot"></span> Analysis Complete';
         analysisPanel.scrollIntoView({ behavior: "smooth", block: "start" });
